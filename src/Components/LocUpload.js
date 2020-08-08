@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { TextField, Button } from '@material-ui/core'
+import { TextField, Button, Typography } from '@material-ui/core'
 
 import Progress from './Progress'
 
@@ -95,13 +95,19 @@ const LocUpload = () => {
                 alignItems: 'center',
             }}>
 
+            <Typography variant="h3">
+                Add a new location
+            </Typography>
             <div
                 style={{
                     margin: '30px',
                     textAlign: 'center'
                 }}
                 className="formInput">
-                <p>Select Image to upload </p>
+                <Typography variant="h6">
+                    Select image to upload
+                </Typography>
+                <br/>
                 <input id="uploadButton" onChange={uploadImage} type='file' name='image'></input>
             </div>
 

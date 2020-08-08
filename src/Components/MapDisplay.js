@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 
 import { db } from '../firebase/config'
@@ -31,29 +32,36 @@ export default class MapDisplay extends React.Component {
 
     render() {
         return (
-            <div 
-            style={{
-                height: '100vh',
-                width: '100%',
-            }}>
 
-            <Map
-                center={[12.9716, 77.5946]}
-                zoom={11}>
-                <TileLayer
-                    attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                {
-                    this.state.data.map(doc =>
-                        <Marker key={doc.title} position={[doc.coords.lat, doc.coords.lng]}>
-                            <Popup onClick={this.getPopupData}>
-                                <PopupCard title={doc.title} description={doc.description} imgURL={doc.imgURL} videoURL={doc.videoURL} />
-                            </Popup>
-                        </Marker>
-                    )
-                }
-            </Map>
+            <div
+                style={{
+                    height: '100vh',
+                    width: '100%',
+                    position: 'relative',
+                }}>
+
+                <Map
+                    center={[12.9716, 77.5946]}
+                    zoom={11}>
+                    <TileLayer
+                        attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    {
+                        this.state.data.map(doc =>
+                            <Marker key={doc.title} position={[doc.coords.lat, doc.coords.lng]}>
+                                <Popup onClick={this.getPopupData}>
+                                    <PopupCard title={doc.title} description={doc.description} imgURL={doc.imgURL} videoURL={doc.videoURL} />
+                                </Popup>
+                            </Marker>
+                        )
+                    }
+                </Map>
+                <Link to="/new-location">
+                    <div className="logoLink">
+                        <img src={require('../Images/logo.png')} alt="logo of the company"></img>
+                    </div>
+                </Link>
             </div>
         )
     }

@@ -17,3 +17,15 @@
   background-color: rgb(75, 75, 75);
 
 }
+
+.logoLink {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  right: 0;
+  z-index: 100000;
+}
+
+.logoLink img {
+  width: 100px;
+}
