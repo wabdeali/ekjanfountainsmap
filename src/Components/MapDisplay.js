@@ -27,11 +27,8 @@ export default class MapDisplay extends React.Component {
                 let data = snapshot.docs.map(doc => doc.data())
                 this.setState({ data })
             })
-    }
 
-    componentDidMount = () => {
         setTimeout(() => this.setState({ modalOpen: true }), 1000)
-
     }
 
     modalClose = () => {
