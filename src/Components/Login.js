@@ -5,6 +5,7 @@ import { auth } from '../firebase/config'
 import { TextField, Button, Typography } from '@material-ui/core'
 
 const Login = () => {
+    let [errorMessage, setErrorMessage] = useState(false)
 
     const login = () => {
         const email = document.querySelector('#email').value;
@@ -13,10 +14,10 @@ const Login = () => {
         auth.signInWithEmailAndPassword( email, password )
             .then( user => {
                 console.log('succesfully logged in')
-                console.log(user)
             })
             .catch( err => {
                 console.log(err)
+                setErrorMessage(true)
             })
         
     }
@@ -57,6 +58,9 @@ const Login = () => {
                 />
             </div>
             <Button onClick={login} variant="outlined">Login</Button>
+            {errorMessage && <div style={{ color: 'red' }}>
+                Incorrect Email or Password
+            </div>}
         </div>
     );
 }
