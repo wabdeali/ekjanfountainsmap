@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-import MapDisplay from './Components/MapDisplay'
+import MapDisplay from './Components/MapDisplay';
+import AdminPanel from './Components/AdminPanel';
 
 import './App.css';
-import LocUpload from './Components/LocUpload';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ function App() {
             <MapDisplay />
           </Route>
           <Route path='/new-location' exact>
-            <LocUpload />
+            <AdminPanel />
           </Route>
         </Switch>
       </BrowserRouter>

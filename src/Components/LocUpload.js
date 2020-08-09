@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 
 import { TextField, Button, Typography } from '@material-ui/core'
 
+import { auth } from '../firebase/config'
+
 import Progress from './Progress'
 
 const LocUpload = () => {
@@ -62,20 +64,20 @@ const LocUpload = () => {
 
     const uploadData = () => {
 
-        if(!img) {
+        if (!img) {
             alert('Please select an image');
             return;
         }
 
-        if(uploadObject.title === '') {
+        if (uploadObject.title === '') {
             alert('Enter the title');
             return;
-        } else if( uploadObject.description === '') {
+        } else if (uploadObject.description === '') {
             alert('Enter the description');
             return;
         }
 
-        if(uploadObject.coords.lat === '' && uploadObject.coords.lng === '') {
+        if (uploadObject.coords.lat === '' && uploadObject.coords.lng === '') {
             alert('Enter Coordinates')
             return;
         }
@@ -84,93 +86,104 @@ const LocUpload = () => {
 
     }
 
-    return (
-        <div
-            style={{
-                width: '50%',
-                margin: '50px auto',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-evenly',
-                alignItems: 'center',
-            }}>
+    const logout = () => {
+        
+        auth.signOut();
 
-            <Typography variant="h3">
-                Add a new location
-            </Typography>
+    }
+
+    return (
+        <>
+            <div style={{ textAlign: 'right', margin: '10px', }}>
+                <Button onClick={logout} variant="outlined">Logout</Button>
+            </div>
             <div
                 style={{
-                    margin: '30px',
-                    textAlign: 'center'
-                }}
-                className="formInput">
-                <Typography variant="h6">
-                    Select image to upload
+                    width: '50%',
+                    margin: '50px auto',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-evenly',
+                    alignItems: 'center',
+                }}>
+
+                <Typography variant="h3">
+                    Add a new location
+            </Typography>
+                <div
+                    style={{
+                        margin: '30px',
+                        textAlign: 'center'
+                    }}
+                    className="formInput">
+                    <Typography variant="h6">
+                        Select image to upload
                 </Typography>
-                <br/>
-                <input id="uploadButton" onChange={uploadImage} type='file' name='image'></input>
+                    <br />
+                    <input id="uploadButton" onChange={uploadImage} type='file' name='image'></input>
+                </div>
+
+                <div className="formInput">
+                    <TextField
+                        className="formInput"
+                        disabled={!textEnabled}
+                        required
+                        fullWidth
+                        label="Title"
+                        variant="filled"
+                        name="title"
+                        onChange={onChangeHandler}
+                        value={uploadObject.title}
+                    />
+                </div>
+
+                <div className="formInput">
+                    <TextField
+                        className="formInput"
+                        disabled={!textEnabled}
+                        required
+                        fullWidth
+                        label="Description"
+                        variant="filled"
+                        name="description"
+                        onChange={onChangeHandler}
+                        value={uploadObject.description}
+                    />
+                </div>
+
+                <div className="formInput">
+                    <TextField
+                        className="formInput"
+                        disabled={!textEnabled}
+                        fullWidth
+                        label="Youtube Video Link"
+                        variant="filled"
+                        name="videoURL"
+                        onChange={onChangeHandler}
+                        value={uploadObject.videoURL}
+                    />
+                </div>
+
+                <div className="formInput">
+                    <TextField
+                        className="formInput"
+                        disabled={!textEnabled}
+                        required
+                        fullWidth
+                        label="Coordinates"
+                        variant="filled"
+                        name="lat"
+                        onChange={getCoords}
+                        value={coords}
+                    />
+                </div>
+
+                <Button onClick={uploadData} variant="outlined" >Upload Data</Button>
+
+                {ready && <Progress file={img} data={uploadObject} setReady={setReady} />}
+
             </div>
-
-            <div className="formInput">
-                <TextField
-                    className="formInput"
-                    disabled={!textEnabled}
-                    required
-                    fullWidth
-                    label="Title"
-                    variant="filled"
-                    name="title"
-                    onChange={onChangeHandler}
-                    value={uploadObject.title}
-                />
-            </div>
-
-            <div className="formInput">
-                <TextField
-                    className="formInput"
-                    disabled={!textEnabled}
-                    required
-                    fullWidth
-                    label="Description"
-                    variant="filled"
-                    name="description"
-                    onChange={onChangeHandler}
-                    value={uploadObject.description}
-                />
-            </div>
-
-            <div className="formInput">
-                <TextField
-                    className="formInput"
-                    disabled={!textEnabled}
-                    fullWidth
-                    label="Youtube Video Link"
-                    variant="filled"
-                    name="videoURL"
-                    onChange={onChangeHandler}
-                    value={uploadObject.videoURL}
-                />
-            </div>
-
-            <div className="formInput">
-                <TextField
-                    className="formInput"
-                    disabled={!textEnabled}
-                    required
-                    fullWidth
-                    label="Coordinates"
-                    variant="filled"
-                    name="lat"
-                    onChange={getCoords}
-                    value={coords}
-                />
-            </div>
-
-            <Button onClick={uploadData} variant="outlined" >Upload Data</Button>
-
-            {ready && <Progress file={img} data={uploadObject} setReady={setReady} />}
-
-        </div>
+        </>
     );
 }
 
