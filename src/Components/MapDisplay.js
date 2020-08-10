@@ -95,10 +95,9 @@ export default class MapDisplay extends React.Component {
                                         <Button size="small" color="primary" href="http://www.ekjanassociates.in/" target="_blank">
                                             Visit our Website
                                         </Button>
-                                        <Button size="small" color="primary" href="google.com/maps/place/EKJAN+ASSOCIATES/@12.9639782,77.5814573,17z/data=!3m1!4b1!4m5!3m4!1s0x3bae15e061b1d57d:0xab548331c241b794!8m2!3d12.963973!4d77.583646" target="_blank">
+                                        <Button size="small" color="primary" href="https://google.com/maps/place/EKJAN+ASSOCIATES/@12.9639782,77.5814573,17z/data=!3m1!4b1!4m5!3m4!1s0x3bae15e061b1d57d:0xab548331c241b794!8m2!3d12.963973!4d77.583646" target="_blank">
                                             Open in Maps
                                         </Button>
-
                                     </CardActions>
                                 </Card>
                             </Popup>
