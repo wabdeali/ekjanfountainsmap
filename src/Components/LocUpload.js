@@ -5,6 +5,7 @@ import { TextField, Button, Typography } from '@material-ui/core'
 import { auth } from '../firebase/config'
 
 import Progress from './Progress'
+import LocationTable from './LocationTable'
 
 const LocUpload = () => {
     const uploadFormat = {
@@ -182,8 +183,11 @@ const LocUpload = () => {
                 <Button onClick={uploadData} variant="outlined" >Upload Data</Button>
 
                 {ready && <Progress file={img} data={uploadObject} setReady={setReady} />}
-
+                
             </div>
+            
+            <LocationTable />
+            
         </>
     );
 }
