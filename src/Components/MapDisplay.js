@@ -1,11 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
+import L from 'leaflet'
 
 import { db } from '../firebase/config'
 import PopupCard from './PopupCard';
 
-import { Modal, Button } from '@material-ui/core'
+import { Modal, Button, Card, CardActionArea, CardMedia, CardContent, Typography, CardActions } from '@material-ui/core'
+
+export const weAreHereIcon = new L.Icon({
+    iconUrl: require('../Images/weAreHere.png'),
+    iconAnchor: [5, 55],
+    popupAnchor: [10, -44],
+    iconSize: [35, 50],
+})
 
 export default class MapDisplay extends React.Component {
     constructor(props) {
@@ -56,20 +65,40 @@ export default class MapDisplay extends React.Component {
 
                     <Map
                         center={[12.9716, 77.5946]}
-                        zoom={11}>
+                        zoom={6}>
                         <TileLayer
                             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
                         {
                             this.state.data.map(doc =>
-                                <Marker key={doc.title} position={[doc.coords.lat, doc.coords.lng]}>
-                                    <Popup onClick={this.getPopupData}>
+                                <Marker key={doc.imgURL} position={[doc.coords.lat, doc.coords.lng]}>
+                                    <Popup>
                                         <PopupCard title={doc.title} description={doc.description} imgURL={doc.imgURL} videoURL={doc.videoURL} />
                                     </Popup>
                                 </Marker>
                             )
                         }
+                        <Marker position={[12.964025, 77.583636]} icon={weAreHereIcon}>
+                            <Popup>
+                                <Card>
+                                    <CardActionArea>
+                                        <CardMedia component="img" src={require('../Images/logo.png')} />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="h2">Ekjan Associates</Typography>
+                                            <Typography variant="body2" color="textSecondary" component="p">
+                                            A house of exclusive Fountains, Fountain Nozzles, Submersible Lights, Fountain Pumps, LED Lights and All kinds of Fountain Accessories.
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                    <CardActions>
+                                        <Button size="small" color="primary" href='www.ekjanassociates.in' target="_blank">
+                                            Visit our Website
+                                        </Button>
+                                    </CardActions>
+                                </Card>
+                            </Popup>
+                        </Marker>
                     </Map>
                     <Link to="/new-location">
                         <div className="logoLink">

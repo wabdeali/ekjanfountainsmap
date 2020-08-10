@@ -143,6 +143,7 @@ const LocUpload = () => {
                         disabled={!textEnabled}
                         required
                         fullWidth
+                        multiline
                         label="Description"
                         variant="filled"
                         name="description"

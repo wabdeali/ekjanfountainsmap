@@ -14,7 +14,7 @@ const PopupCard = (props) => {
                 </CardContent>
             </CardActionArea>
             {props.videoURL.length > 0 && <CardActions>
-                <Button size="small" color="primary" href={props.videoURL}>
+                <Button size="small" color="primary" href={props.videoURL} target="_blank">
                     Watch Video
                 </Button>
             </CardActions>}
