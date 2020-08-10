@@ -92,9 +92,13 @@ export default class MapDisplay extends React.Component {
                                         </CardContent>
                                     </CardActionArea>
                                     <CardActions>
-                                        <Button size="small" color="primary" href='www.ekjanassociates.in' target="_blank">
+                                        <Button size="small" color="primary" href="http://www.ekjanassociates.in/" target="_blank">
                                             Visit our Website
                                         </Button>
+                                        <Button size="small" color="primary" href="https://g.page/ekjan?share" target="_blank">
+                                            Open in Maps
+                                        </Button>
+
                                     </CardActions>
                                 </Card>
                             </Popup>
