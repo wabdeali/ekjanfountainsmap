@@ -10,10 +10,12 @@
     projectId: "ekjanfountains-map",
     storageBucket: "ekjanfountains-map.appspot.com",
     messagingSenderId: "289965747765",
-    appId: "1:289965747765:web:7863401b8519253012cb7c"
+    appId: "1:289965747765:web:7863401b8519253012cb7c",
+    measurementId: "G-WZ851730BJ"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
 
   const db = firebase.firestore();
   const storage = firebase.storage();
