@@ -53,3 +53,25 @@
   margin: 0 8% 20px;
   line-height: 1.5em;
 }
+
+.editButton:hover {
+  transform: scale(1.08);
+  cursor: pointer;
+}
+
+.editModal {
+  background-color: rgb(245, 245, 245);
+  padding: 20px;
+  border-radius: 5px;
+  margin: 20px;
+  text-align: center;
+  outline: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 88vh;
+}
+
+.modalImg {
+  max-height: 35vh;
+  margin: 10px;
+}

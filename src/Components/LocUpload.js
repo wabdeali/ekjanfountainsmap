@@ -78,7 +78,7 @@ const LocUpload = () => {
             return;
         }
 
-        if (uploadObject.coords.lat === '' && uploadObject.coords.lng === '') {
+        if (uploadObject.coords.lat === '' || uploadObject.coords.lng === '') {
             alert('Enter Coordinates')
             return;
         }
@@ -88,7 +88,7 @@ const LocUpload = () => {
     }
 
     const logout = () => {
-        
+
         auth.signOut();
 
     }
@@ -182,12 +182,12 @@ const LocUpload = () => {
 
                 <Button onClick={uploadData} variant="outlined" >Upload Data</Button>
 
-                {ready && <Progress file={img} data={uploadObject} setReady={setReady} />}
-                
+                {ready && <Progress file={img} data={uploadObject} setReady={setReady} setUploadObject={setUploadObject} setCoords={setCoords} setImg={setImg} />}
+
             </div>
-            
+
             <LocationTable />
-            
+
         </>
     );
 }
