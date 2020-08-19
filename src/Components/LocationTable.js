@@ -16,6 +16,7 @@ import DeleteModal from './DeleteModal';
 
 export default function LocationTable() {
     let [data, setData] = useState(null)
+    let [uniqueLocations, setUniqueLocations] = useState(null)
     let [showEditModal, setShowEditModal] = useState(false)
     let [editModalData, setEditModalData] = useState(null)
     let [showDeleteModal, setShowDeleteModal] = useState(false)
@@ -28,6 +29,18 @@ export default function LocationTable() {
                 let data = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }))
                 data.sort((a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
                 setData(data)
+
+                //This is to log all the unique locations 
+                let tempUniqueLocations = [];
+
+                data.forEach(loc => {
+                    if (!tempUniqueLocations.includes(loc.title)) {
+                        tempUniqueLocations.push(loc.title)
+                    }
+                })
+
+                setUniqueLocations(tempUniqueLocations)
+
             })
             .catch(err => {
                 console.log(err)
@@ -55,13 +68,41 @@ export default function LocationTable() {
                     textAlign: 'center',
                     margin: '20px',
                 }}>
-                    <Typography variant="h4">All Locations</Typography>
-                    <Typography variant="h6">{`Total Number of Locations: ${data.length}`}</Typography>
+                    {/* <Typography variant="h4">All Locations</Typography>
+                    <Typography variant="h6">{`Total Number of Locations: ${data.length}`}</Typography> */}
                 </div>
                 <div style={{
-                    margin: '10px 20px',
-
+                    width: '60%',
+                    margin: '0 auto',
                 }}>
+
+                    <Typography variant="h5">Unique Locations</Typography>
+                    {uniqueLocations && <TableContainer component={Paper}>
+                        <Table aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>ID</TableCell>
+                                    <TableCell>TITLE</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {
+                                    uniqueLocations.map((loc, i) =>
+                                        <TableRow>
+                                            <TableCell>{i + 1}</TableCell>
+                                            <TableCell>{loc}</TableCell>
+                                        </TableRow>
+                                    )
+                                }
+                            </TableBody>
+                        </Table>
+                    </TableContainer>}
+
+                    <br />
+                    <br />
+
+                    <Typography variant="h4">All Locations</Typography>
+                    <Typography variant="h6">{`Total Number of Locations: ${data.length}`}</Typography>
                     <TableContainer component={Paper}>
                         <Table aria-label="simple table">
                             <TableHead>
@@ -81,8 +122,10 @@ export default function LocationTable() {
                                         <TableCell>{row.title}</TableCell>
                                         <TableCell>{row.description}</TableCell>
                                         <TableCell>
-                                            <Edit className="editButton" onClick={() => changeShowEditModal(row)} />
-                                            <Delete color="secondary" className="editButton" onClick={() => changeShowDeleteModal(row)} />
+                                            <div style={{ width: '30%' }}>
+                                                <Edit className="editButton" onClick={() => changeShowEditModal(row)} />
+                                                <Delete color="secondary" className="editButton" onClick={() => changeShowDeleteModal(row)} />
+                                            </div>
                                         </TableCell>
                                     </TableRow>
                                 ))}

@@ -46,8 +46,6 @@ export default class EditModal extends Component {
 
             this.setState({ data })
         }
-
-        console.log(this.state.data)
     }
 
     updateLocation = () => {
