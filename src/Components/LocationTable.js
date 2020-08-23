@@ -10,13 +10,15 @@ import Delete from '@material-ui/icons/Delete';
 import Edit from '@material-ui/icons/Edit';
 
 import { db } from '../firebase/config'
-import { Typography, Modal, DialogContent } from '@material-ui/core';
+import { Typography, Modal, DialogContent, Button } from '@material-ui/core';
 import EditModal from './EditModal';
 import DeleteModal from './DeleteModal';
+import { CSVLink, CSVDownload } from 'react-csv';
 
 export default function LocationTable() {
     let [data, setData] = useState(null)
     let [uniqueLocations, setUniqueLocations] = useState(null)
+    let [csvData, setCsvData] = useState("")
     let [showEditModal, setShowEditModal] = useState(false)
     let [editModalData, setEditModalData] = useState(null)
     let [showDeleteModal, setShowDeleteModal] = useState(false)
@@ -61,6 +63,28 @@ export default function LocationTable() {
 
     }
 
+    const downloadBackup = (event, done) => {
+
+        const csvData = data;
+        const headers = ['title', 'description', 'imgURL', 'videoURL', 'lat', 'lng'];
+        const csvRows = [];
+        csvRows.push(headers);
+
+        for (const row of csvData) {
+            const values = [
+                row.title,
+                row.description,
+                row.imgURL,
+                row.videoURL,
+                row.coords.lat,
+                row.coords.lng,
+            ]
+            csvRows.push(values);
+        }
+
+        setCsvData(csvRows)
+    }
+
     if (data !== null) {
         return (
             <>
@@ -88,7 +112,7 @@ export default function LocationTable() {
                             <TableBody>
                                 {
                                     uniqueLocations.map((loc, i) =>
-                                        <TableRow>
+                                        <TableRow key={i}>
                                             <TableCell>{i + 1}</TableCell>
                                             <TableCell>{loc}</TableCell>
                                         </TableRow>
@@ -100,6 +124,10 @@ export default function LocationTable() {
 
                     <br />
                     <br />
+
+                    <CSVLink onClick={(event, done) => downloadBackup(event, done)} data={csvData}>
+                        <Button variant="outlined" size="small">Download Backup</Button>
+                    </CSVLink>
 
                     <Typography variant="h4">All Locations</Typography>
                     <Typography variant="h6">{`Total Number of Locations: ${data.length}`}</Typography>

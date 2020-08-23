@@ -11,6 +11,7 @@
     "firebase": "^7.17.1",
     "leaflet": "^1.6.0",
     "react": "^16.13.1",
+    "react-csv": "^2.0.3",
     "react-dom": "^16.13.1",
     "react-leaflet": "^2.7.0",
     "react-leaflet-search": "^1.0.3",

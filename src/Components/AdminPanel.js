@@ -8,22 +8,20 @@ const AdminPanel = () => {
     let [isLoggedIn, setIsLoggedIn] = useState(false)
 
     useEffect(() => {
-        auth.onAuthStateChanged( user => {
+        auth.onAuthStateChanged(user => {
             if (user) {
-                setIsLoggedIn( true );
+                setIsLoggedIn(true);
             } else {
-                setIsLoggedIn( false )
+                setIsLoggedIn(false)
             }
         })
     }, [])
 
     return (
-
         <>
             {isLoggedIn ? <LocUpload /> : <Login />}
         </>
-
-    );
+    )
 }
 
 export default AdminPanel;
