@@ -13,7 +13,7 @@ import { db } from '../firebase/config'
 import { Typography, Modal, DialogContent, Button } from '@material-ui/core';
 import EditModal from './EditModal';
 import DeleteModal from './DeleteModal';
-import { CSVLink, CSVDownload } from 'react-csv';
+import { CSVLink } from 'react-csv';
 
 export default function LocationTable() {
     let [data, setData] = useState(null)
